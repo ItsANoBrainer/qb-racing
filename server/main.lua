@@ -477,6 +477,17 @@ function GenerateRaceId()
     return RaceId
 end
 
+function UseRacingFob(source, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+    local citizenid = Player.PlayerData.citizenid
+
+    if item.info.owner == citizenid then
+        TriggerClientEvent('qb-racing:Client:OpenMainMenu', source, { type = item.name, name = item.info.name})
+    else
+        TriggerClientEvent('QBCore:Notify', source, Lang:t("error.unowned_dongle"), "error")
+    end
+end
+
 QBCore.Functions.CreateCallback('qb-racing:server:GetRacingLeaderboards', function(source, cb)
     local Leaderboard = {}
     for RaceId, RaceData in pairs(Races) do
@@ -566,23 +577,9 @@ QBCore.Commands.Add(Lang:t("commands.create_racing_fob_command"), Lang:t("comman
 end, 'admin')
 
 QBCore.Functions.CreateUseableItem("fob_racing_basic", function(source, item)
-    local Player = QBCore.Functions.GetPlayer(source)
-    local citizenid = Player.PlayerData.citizenid
-
-    if item.info.owner == citizenid then
-        TriggerClientEvent('qb-racing:Client:OpenMainMenu', source, { type = item.name, name = item.info.name})
-    else
-        TriggerClientEvent('QBCore:Notify', source, Lang:t("error.unowned_dongle"), "error")
-    end
+    UseRacingFob(source, item)
 end)
 
 QBCore.Functions.CreateUseableItem("fob_racing_master", function(source, item)
-    local Player = QBCore.Functions.GetPlayer(source)
-    local citizenid = Player.PlayerData.citizenid
-
-    if item.info.owner == citizenid then
-        TriggerClientEvent('qb-racing:Client:OpenMainMenu', source, { type = item.name, name = item.info.name})
-    else
-        TriggerClientEvent('QBCore:Notify', source, Lang:t("error.unowned_dongle"), "error")
-    end
+    UseRacingFob(source, item)
 end)
