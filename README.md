@@ -43,7 +43,7 @@ Config Options per Dongle:
 ### Creating a Race
 [![Video Example](https://i.imgur.com/DCFUJw9.png)](https://i.imgur.com/WoSxall.mp4)
 ### Race Interface, Joining a Race, Finishing a Race
-[![Video Example](https://i.imgur.com/hsZVHeL.png)](https://i.imgur.com/jfTlu9B.mp4)
+[![Video Example](https://i.imgur.com/hsZVHeL.png)](https://i.imgur.com/oYgHBdj.mp4)
 
 # Change Log
 ### 1.02
