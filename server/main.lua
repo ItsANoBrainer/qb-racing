@@ -565,7 +565,18 @@ QBCore.Commands.Add(Lang:t("commands.create_racing_fob_command"), Lang:t("comman
     QBCore.Functions.GetPlayer(source).Functions.AddItem(type, 1, nil, { owner = citizenid, name = name })
 end, 'admin')
 
-QBCore.Functions.CreateUseableItem({"fob_racing_basic", "fob_racing_master"}, function(source, item)
+QBCore.Functions.CreateUseableItem("fob_racing_basic", function(source, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+    local citizenid = Player.PlayerData.citizenid
+
+    if item.info.owner == citizenid then
+        TriggerClientEvent('qb-racing:Client:OpenMainMenu', source, { type = item.name, name = item.info.name})
+    else
+        TriggerClientEvent('QBCore:Notify', source, Lang:t("error.unowned_dongle"), "error")
+    end
+end)
+
+QBCore.Functions.CreateUseableItem("fob_racing_master", function(source, item)
     local Player = QBCore.Functions.GetPlayer(source)
     local citizenid = Player.PlayerData.citizenid
 
