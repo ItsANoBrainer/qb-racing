@@ -574,6 +574,7 @@ QBCore.Commands.Add(Lang:t("commands.create_racing_fob_command"), Lang:t("comman
     end
 
     QBCore.Functions.GetPlayer(source).Functions.AddItem(type, 1, nil, { owner = citizenid, name = name })
+    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[type], 'add', 1)
 end, 'admin')
 
 QBCore.Functions.CreateUseableItem("fob_racing_basic", function(source, item)

@@ -46,6 +46,10 @@ Config Options per Dongle:
 [![Video Example](https://i.imgur.com/hsZVHeL.png)](https://i.imgur.com/jfTlu9B.mp4)
 
 # Change Log
+### 1.02
+* Use item hotfix
+* Added InfoBox on inventory item add for createracingfob
+
 ### 1.0
 * Initial release
 
