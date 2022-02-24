@@ -317,7 +317,7 @@ function CreatorLoop()
                 end
 
                 if IsControlJustPressed(0, 311) or IsDisabledControlJustPressed(0, 311) then
-                    if CreatorData.Checkpoints and #CreatorData.Checkpoints >= Config.MinCheckpoints then
+                    if CreatorData.Checkpoints and #CreatorData.Checkpoints >= Config.MinimumCheckpoints then
                         SaveRace()
                     else
                         QBCore.Functions.Notify(Lang:t("error.not_enough_checkpoints")..'('..Config.MinimumCheckpoints..')', 'error')
