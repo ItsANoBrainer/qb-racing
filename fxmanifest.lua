@@ -11,7 +11,8 @@ ui_page 'html/index.html'
 shared_scripts {
     'config.lua',
     '@qb-core/shared/locale.lua',
-    'locales/en.lua', 
+    'locales/en.lua',
+    --'locales/es.lua', --uncomment if you use spanish
 }
 
 client_script 'client/main.lua'
