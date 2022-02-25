@@ -13,8 +13,8 @@ Config Options per Dongle:
 
 # Setup
 1. Update or insert the database table. Instructions are found in the `racing.sql` file
-	a. Updating from qb-lapraces must follow OPTION 1 to update their database table and preserve their race tracks
-	b. NOT updating from qb-lapraces must follow OPTION 2 to create the database table 
+* Option 1: Updating from qb-lapraces must follow OPTION 1 to update their database table and preserve their race tracks
+* Option 2: NOT updating from qb-lapraces must follow OPTION 2 to create the database table 
 2. Adjust values in the `config.lua` file to your likings
 3. Add the items to your `qb-core/shared/items.lua`
 ```lua
@@ -22,6 +22,7 @@ Config Options per Dongle:
 ['fob_racing_master'] = {['name'] = 'fob_racing_master', ['label'] = 'Master Racing Fob', ['weight'] = 500, ['type'] = 'item', ['image'] = 'fob_racing_master.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['description'] = 'This master fob allows someone to create custom races.'},
 ```
 4. Add the item images to your inventory image folder
+5. Until my [qb-menu pull request](https://github.com/qbcore-framework/qb-menu/pull/23) is approved (or denied), permission enable/disable config support will not work. You can either wait for the PR, just make the changes in the PR to your version, or implement your own logic in the script.
 
 # Dependencies
 * [qb-menu](https://github.com/qbcore-framework/qb-menu)
