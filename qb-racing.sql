@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `race_tracks` (
   `name` varchar(50) DEFAULT NULL,
   `checkpoints` text DEFAULT NULL,
   `records` text DEFAULT NULL,
-  `creatorcid` varchar(50) DEFAULT NULL,
+  `creatorid` varchar(50) DEFAULT NULL,
   `creatorname` varchar(50) DEFAULT NULL,
   `distance` int(11) DEFAULT NULL,
   `raceid` varchar(50) DEFAULT NULL,
