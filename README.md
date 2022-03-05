@@ -1,7 +1,13 @@
-# QBCore Racing
+# ItsANoBrainer
+
+If you like or use this resource, please consider supporting by starring the repo and checking out my other resources.
+
+## _QBCore Racing_
 Original code converted, tied up, slightly rewritten, and features added from [qb-lapraces](https://github.com/qbcore-framework/qb-lapraces).
 
 I really liked the qb-lapraces, but I wanted a standalone version that did not require qb-phone, as well as some custom features so here it is!
+
+This so
 
 QB-Racing lets you manage your racing scene in a better way using items and custom racer names instead of player names! There are two items involved, the `master racing fob`, and the `basic racing fob`. At the moment, these are created using the `createracingfob` command by a qb-core admin, but you can implement any system you want. When created, the fob is bound to the citizenid it was created for, and has a racer name attached to it. Only the citizenid created for it can use it. Using the fob brings up the racing options menu (examples below) which is where you do all the interacting with the script. Each fob has an entry in the Config to tune it to your server to allow or deny certain usage abilities (listed below). By default the master racing fob is required to CREATE new race tracks, and both dongles allow you to do everything else.
 
@@ -11,7 +17,9 @@ Config Options per Dongle:
  - Setup a new race
  - Create a new race track
 
-# Setup
+## Setup
+You only need either this resource, or qb-lapraces, not both. I have not tested if they work independently together.
+
 1. Update or insert the database table. Instructions are found in the `racing.sql` file
 * Option 1: Updating from qb-lapraces must follow OPTION 1 to update their database table and preserve their race tracks
 * Option 2: NOT updating from qb-lapraces must follow OPTION 2 to create the database table 
@@ -24,11 +32,11 @@ Config Options per Dongle:
 4. Add the item images to your inventory image folder
 5. Until my [qb-menu pull request](https://github.com/qbcore-framework/qb-menu/pull/23) is approved (or denied), permission enable/disable config support will not work. You can either wait for the PR, just make the changes in the PR to your version, or implement your own logic in the script.
 
-# Dependencies
+## Dependencies
 * [qb-menu](https://github.com/qbcore-framework/qb-menu)
 * [qb-input](https://github.com/qbcore-framework/qb-input)
 
-# Features
+## Features
 * Standalone racing script not requiring qb-phone to utilize
 * Items to immerse your racing scene with Racer Names
 * Config options to adjust item permissions to your liking
@@ -36,45 +44,31 @@ Config Options per Dongle:
 * Locale Support
 * Create Custom Races Tracks
 
-# Example Usage
-## Interface Examples
+## Example Usage
+### Interface Examples
 ![Interface](https://i.imgur.com/4SyDq5k.png)
 
-## Video Example
-### Creating a Race
+### Video Example
+#### Creating a Race
 [![Video Example](https://i.imgur.com/DCFUJw9.png)](https://i.imgur.com/WoSxall.mp4)
-### Race Interface, Joining a Race, Finishing a Race
+#### Race Interface, Joining a Race, Finishing a Race
 [![Video Example](https://i.imgur.com/hsZVHeL.png)](https://i.imgur.com/oYgHBdj.mp4)
 
-# Change Log
-### 1.02
+## Change Log
+#### 1.02
 * Use item hotfix
 * Added InfoBox on inventory item add for createracingfob
 
-### 1.0
+#### 1.0
 * Initial release
 
-# Future ToDos
+## Future ToDos
 * Ability to delete race tracks ingame
 
-# Other Creations
+## Other Creations
+* [FiveMArtifactUpdater](https://github.com/ItsANoBrainer/FiveMArtifactUpdater)
 * [qb-scenes](https://github.com/ItsANoBrainer/qb-scenes)
 
 
-# License
-
-    QB Racing
-    Copyright (C) 2022
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>
+## License
+[GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html)
