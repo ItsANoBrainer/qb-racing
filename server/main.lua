@@ -13,7 +13,7 @@ local NotFinished = {}
 MySQL.ready(function ()
     local races = MySQL.Sync.fetchAll('SELECT * FROM race_tracks', {})
     if races[1] ~= nil then
-        for k, v in pairs(races) do
+        for _, v in pairs(races) do
             local Records = {}
             if v.records ~= nil then
                 Records = json.decode(v.records)
@@ -40,7 +40,6 @@ end)
 -----------------------
 RegisterNetEvent('qb-racing:server:FinishPlayer', function(RaceData, TotalTime, TotalLaps, BestLap)
     local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
     local AvailableKey = GetOpenedRaceKey(RaceData.RaceId)
     local RacerName = RaceData.RacerName
     local PlayersFinished = 0
@@ -119,7 +118,7 @@ RegisterNetEvent('qb-racing:server:CreateLapRace', function(RaceName, RacerName)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
 
-    if IsPermissioned(Player.PlayerData.citizenid, 'create') then 
+    if IsPermissioned(Player.PlayerData.citizenid, 'create') then
         if IsNameAvailable(RaceName) then
             TriggerClientEvent('qb-racing:client:StartRaceEditor', source, RaceName, RacerName)
         else
@@ -139,11 +138,10 @@ RegisterNetEvent('qb-racing:server:JoinRace', function(RaceData)
     local CurrentRace = GetCurrentRace(Player.PlayerData.citizenid)
     local RacerName = RaceData.RacerName
 
-    print('qb-racing:server:JoinRace', RacerName)
     if CurrentRace ~= nil then
         local AmountOfRacers = 0
         PreviousRaceKey = GetOpenedRaceKey(CurrentRace)
-        for k, v in pairs(Races[CurrentRace].Racers) do
+        for _,_ in pairs(Races[CurrentRace].Racers) do
             AmountOfRacers = AmountOfRacers + 1
         end
         Races[CurrentRace].Racers[Player.PlayerData.citizenid] = nil
@@ -158,6 +156,8 @@ RegisterNetEvent('qb-racing:server:JoinRace', function(RaceData)
             AvailableRaces[PreviousRaceKey].RaceData = Races[CurrentRace]
             TriggerClientEvent('qb-racing:client:LeaveRace', src, Races[CurrentRace])
         end
+    else
+        Races[RaceId].OrganizerCID = Player.PlayerData.citizenid
     end
 
     Races[RaceId].Waiting = true
@@ -546,7 +546,7 @@ QBCore.Commands.Add(Lang:t("commands.create_racing_fob_command"), Lang:t("comman
         ['master'] = "fob_racing_master"
     }
 
-    if fobTypes[type:lower()] then 
+    if fobTypes[type:lower()] then
         type = fobTypes[type:lower()]
     else
         TriggerClientEvent('QBCore:Notify', source, Lang:t("error.invalid_fob_type"), "error")

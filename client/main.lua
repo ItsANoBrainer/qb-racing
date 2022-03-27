@@ -112,7 +112,7 @@ function DeleteCheckpoint()
                 Blip = nil
             end
 
-            local PileLeft = ClosestCheckpoint.pileleft 
+            local PileLeft = ClosestCheckpoint.pileleft
             if PileLeft then
                 DeleteClosestObject(ClosestCheckpoint.offset.left, Config.CheckpointPileModel)
                 PileLeft = nil
@@ -149,12 +149,12 @@ function DeleteCreatorCheckpoints()
         end
 
         if CurrentCheckpoint then
-            local PileLeft = CurrentCheckpoint.pileleft 
+            local PileLeft = CurrentCheckpoint.pileleft
             if PileLeft then
                 DeleteClosestObject(CurrentCheckpoint.offset.left, Config.CheckpointPileModel)
                 PileLeft = nil
             end
-    
+
             local PileRight = CurrentCheckpoint.pileright
             if PileRight then
                 DeleteClosestObject(CurrentCheckpoint.offset.right, Config.CheckpointPileModel)
@@ -166,12 +166,12 @@ end
 
 function SetupPiles()
     for k, v in pairs(CreatorData.Checkpoints) do
-        if not CreatorData.Checkpoints[k].pileleft then 
-            CreatorData.Checkpoints[k].pileleft = CreatePile(v.offset.left, Config.CheckpointPileModel) 
+        if not CreatorData.Checkpoints[k].pileleft then
+            CreatorData.Checkpoints[k].pileleft = CreatePile(v.offset.left, Config.CheckpointPileModel)
         end
 
-        if not CreatorData.Checkpoints[k].pileright then 
-            CreatorData.Checkpoints[k].pileright = CreatePile(v.offset.right, Config.CheckpointPileModel) 
+        if not CreatorData.Checkpoints[k].pileright then
+            CreatorData.Checkpoints[k].pileright = CreatePile(v.offset.right, Config.CheckpointPileModel)
         end
     end
 end
@@ -414,6 +414,7 @@ function SetupRace(RaceData, Laps)
     CurrentRaceData = {
         RaceId = RaceData.RaceId,
         Creator = RaceData.Creator,
+        OrganizerCID = RaceData.OrganizerCID,
         RacerName = RaceData.RacerName,
         RaceName = RaceData.RaceName,
         Checkpoints = RaceData.Checkpoints,
@@ -464,7 +465,7 @@ function DoPilePfx()
     end
 end
 
-local 
+local
 
 function GetMaxDistance(OffsetCoords)
     local Distance = #(vector3(OffsetCoords.left.x, OffsetCoords.left.y, OffsetCoords.left.z) - vector3(OffsetCoords.right.x, OffsetCoords.right.y, OffsetCoords.right.z))
@@ -866,7 +867,7 @@ RegisterNetEvent("qb-racing:Client:OpenMainMenu", function(data)
         {
             header = Lang:t("menu.ready_to_race")..name..'?',
             isMenuHeader = true
-        }, 
+        },
         {
             header = Lang:t("menu.current_race"),
             txt = Lang:t("menu.current_race_txt"),
@@ -935,11 +936,11 @@ RegisterNetEvent("qb-racing:Client:CurrentRaceMenu", function(data)
         {
             header = CurrentRaceData.RaceName..' | '..racers..Lang:t("menu.racers"),
             isMenuHeader = true
-        }, 
+        },
         {
             header = Lang:t("menu.start_race"),
             txt = "",
-            disabled = (not (CurrentRaceData.Creator == QBCore.Functions.GetPlayerData().citizenid) or CurrentRaceData.Started),
+            disabled = (not (CurrentRaceData.OrganizerCID == QBCore.Functions.GetPlayerData().citizenid) or CurrentRaceData.Started),
             params = {
                 isServer = true,
                 event = "qb-racing:server:StartRace",
@@ -993,7 +994,7 @@ RegisterNetEvent("qb-racing:Client:AvailableRacesMenu", function(data)
                 }
             }
         end
-        
+
         menu[#menu+1] = {
             header = Lang:t("menu.go_back"),
             params = {
@@ -1002,7 +1003,7 @@ RegisterNetEvent("qb-racing:Client:AvailableRacesMenu", function(data)
             }
         }
 
-        if #menu == 2 then 
+        if #menu == 2 then
             QBCore.Functions.Notify(Lang:t("primary.no_pending_races"))
             TriggerEvent('qb-racing:Client:OpenMainMenu', { type = data.type, name = data.name })
             return
@@ -1032,7 +1033,7 @@ RegisterNetEvent("qb-racing:Client:RaceRecordsMenu", function(data)
                 disabled = true,
             }
         end
-        
+
         menu[#menu+1] = {
             header = Lang:t("menu.go_back"),
             params = {
@@ -1041,7 +1042,7 @@ RegisterNetEvent("qb-racing:Client:RaceRecordsMenu", function(data)
             }
         }
 
-        if #menu == 2 then 
+        if #menu == 2 then
             QBCore.Functions.Notify(Lang:t("primary.no_races_exist"))
             TriggerEvent('qb-racing:Client:OpenMainMenu', { type = data.type, name = data.name })
             return
@@ -1060,7 +1061,7 @@ RegisterNetEvent("qb-racing:Client:SetupRaceMenu", function(data)
             end
         end
 
-        if #tracks == 1 then 
+        if #tracks == 1 then
             QBCore.Functions.Notify(Lang:t("primary.no_available_tracks"))
             TriggerEvent('qb-racing:Client:OpenMainMenu', { type = data.type, name = data.name })
             return
@@ -1078,16 +1079,16 @@ RegisterNetEvent("qb-racing:Client:SetupRaceMenu", function(data)
                 },
                 {
                     text = Lang:t("menu.number_laps"),
-                    name = "laps", 
+                    name = "laps",
                     type = "number",
                     isRequired = true
                 },
             },
         })
 
-        if not dialog or dialog.track == "none" then 
+        if not dialog or dialog.track == "none" then
             TriggerEvent('qb-racing:Client:OpenMainMenu', { type = data.type, name = data.name })
-            return 
+            return
         end
 
         TriggerServerEvent('qb-racing:server:SetupRace', dialog.track, tonumber(dialog.laps), data.name)
@@ -1101,16 +1102,16 @@ RegisterNetEvent("qb-racing:Client:CreateRaceMenu", function(data)
         inputs = {
             {
                 text = Lang:t("menu.name_track"),
-                name = "trackname", 
+                name = "trackname",
                 type = "text",
                 isRequired = true
             }
         },
     })
 
-    if not dialog then 
+    if not dialog then
         TriggerEvent('qb-racing:Client:OpenMainMenu', { type = data.type, name = data.name })
-        return 
+        return
     end
 
     if #dialog.trackname < Config.MinTrackNameLength then
@@ -1120,17 +1121,17 @@ RegisterNetEvent("qb-racing:Client:CreateRaceMenu", function(data)
     end
 
     if #dialog.trackname > Config.MaxTrackNameLength then
-        QBCore.Functions.Notify(Lang:t("error.name_too_long"), "error") 
+        QBCore.Functions.Notify(Lang:t("error.name_too_long"), "error")
         TriggerEvent("qb-racing:Client:CreateRaceMenu", { type = data.type, name = data.name })
         return
     end
 
     QBCore.Functions.TriggerCallback('qb-racing:server:IsAuthorizedToCreateRaces', function(IsAuthorized, NameAvailable)
         if not IsAuthorized then return end
-        if not NameAvailable then 
+        if not NameAvailable then
             QBCore.Functions.Notify(Lang:t("error.race_name_exists"), "error")
             TriggerEvent("qb-racing:Client:CreateRaceMenu", { type = data.type, name = data.name })
-            return 
+            return
         end
 
         TriggerServerEvent('qb-racing:server:CreateLapRace', dialog.trackname, data.name)
